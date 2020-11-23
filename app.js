@@ -35,5 +35,8 @@ function displayError(error) {
     const heading = document.querySelector('.heading');
     const card = document.querySelector('.card');
     card.insertBefore(errorDiv, heading);
+    setTimeout(() => {
+        errorDiv.remove()
+    }, 2000);
 
 }
