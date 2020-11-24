@@ -1,6 +1,15 @@
-document.getElementById('loan-form').addEventListener('submit', calculateres);
+document.getElementById('loan-form').addEventListener('submit', function(e) {
+    //hide resuls
+    document.getElementById('results').style.display = 'none';
+    //show loader
+    document.getElementById('loading').style.display = 'block';
+    setTimeout(calculateres, 2000);
+
+    e.preventDefault();
+});
+
 //räkna
-function calculateres(e) {
+function calculateres() {
     const amount = document.querySelector('#amount');
     const intrest = document.querySelector('#interest');
     const years = document.querySelector('#years');
@@ -19,12 +28,14 @@ function calculateres(e) {
         monthPayment.value = monthly.toFixed(2);
         totalPayment.value = (monthly * calcPayment).toFixed(2)
         totintrest.value = ((monthly * calcPayment) - amValue).toFixed(2);
+        document.getElementById('results').style.display = 'block';
+        document.getElementById('loading').style.display = 'none';
 
     } else {
         displayError('något gick fel');
     }
 
-    e.preventDefault();
+
 }
 
 function displayError(error) {
@@ -39,4 +50,5 @@ function displayError(error) {
         errorDiv.remove()
     }, 2000);
 
+    document.getElementById('loading').style.display = 'none';
 }
